@@ -18,9 +18,16 @@ def linear_search_iterative(array, item):
 
 def linear_search_recursive(array, item, index=0):
     # TODO: implement linear search recursively here
-    pass
+    if array[index] == item:
+        return index
+
+    elif index == len(array)-1:
+        return None
+
+    return linear_search_recursive(array,item,index+1)
     # once implemented, change linear_search to call linear_search_recursive
-    # to verify that your recursive implementation passes all tests
+    # to ver
+    #if that your recursive implementation passes all tests
 
 
 def binary_search(array, item):
@@ -33,13 +40,50 @@ def binary_search(array, item):
 
 def binary_search_iterative(array, item):
     # TODO: implement binary search iteratively here
-    pass
+    left = 0
+
+    right = len(array)-1
+
+    while left <= right:
+        middle = left + (right - left)//2;
+
+        if array[middle] == item:
+            return middle
+
+        elif array[middle] < item:
+            left = middle + 1
+        
+        else:
+            right = middle - 1
+
+    return 'Could Not Find'
+
     # once implemented, change binary_search to call binary_search_iterative
     # to verify that your iterative implementation passes all tests
 
-
 def binary_search_recursive(array, item, left=None, right=None):
     # TODO: implement binary search recursively here
-    pass
+    if left == None: left = 0
+    if right == None: right = len(array)-1
+
+    middle = ((right - left) //2) + left
+    current = array[middle]
+
+    if item == current:
+        return middle
+
+    elif right == left:
+        return None
+
+
+    if current > item:
+        return binary_search_recursive(array,item,left,middle-1)
+
+    else:
+        return binary_search_recursive(array,item,middle+1, right)
+
     # once implemented, change binary_search to call binary_search_recursive
     # to verify that your recursive implementation passes all tests
+
+    if __name__ == '__main__':
+        print(binary_search(["a","b","c","d",], "ds"))
